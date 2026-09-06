@@ -1,0 +1,8 @@
+n=    0 words (34 chat tokens) needle=27611 | chat: MISS '291' | raw: MISS 'Q. The The.'
+n=   20 words (53 chat tokens) needle=31620 | chat: MISS '314159' | raw: MISS 'Whatisnotheatre\n...\ntheatre...\ntheatre..'
+n=   50 words (84 chat tokens) needle=41918 | chat: MISS '42' | raw: MISS 'Whatisnttravtravtravtravtravtravtravtrav'
+n=  100 words (133 chat tokens) needle=86172 | chat: MISS '865123456789' | raw: MISS 'Whatstonesstonesstonesstonesstonesstones'
+n=  200 words (234 chat tokens) needle=18795 | chat: MISS '1. **8**' | raw: MISS 'Whatcarcarcarcarcarcarcarcarcarcarcarcar'
+n=  400 words (434 chat tokens) needle=75232 | chat: MISS '78% of the letters in the text are: "The' | raw: MISS '123quietquietquietquietquietquietquietqu'
+n=  800 words (833 chat tokens) needle=23780 | chat: MISS '2023' | raw: MISS '222stonesstonesstonesstonesstonesstoness'
+n= 1600 words (1633 chat tokens) needle=61520 | chat: MISS '6. 10.' | raw: MISS '123457211111111'

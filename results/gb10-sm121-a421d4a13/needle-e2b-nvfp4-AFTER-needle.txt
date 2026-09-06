@@ -1,0 +1,18 @@
+
+[e2b-nvfp4-AFTER-needle] round 0 ctx~300w  needles={'10pct': '72649', '50pct': '75459', '90pct': '99777'}
+  reuse 0: MISS  10pct reused=      0 got='99777'
+  reuse 1: OK   50pct reused=    352 got='75459'
+  reuse 2: OK   90pct reused=    352 got='99777'
+
+[e2b-nvfp4-AFTER-needle] round 0 ctx~1000w  needles={'10pct': '67091', '50pct': '42497', '90pct': '61567'}
+  reuse 0: OK   10pct reused=      0 got='67091'
+  reuse 1: OK   50pct reused=   1056 got='42497 . the moved across'
+  reuse 2: OK   90pct reused=   1056 got='61567'
+
+[e2b-nvfp4-AFTER-needle] round 0 ctx~4000w  needles={'10pct': '96130', '50pct': '72783', '90pct': '64844'}
+  reuse 0: MISS  10pct reused=      0 got='10'
+  reuse 1: OK   50pct reused=      0 got='72783.\nQuery 1. Repeat o'
+  reuse 2: OK   90pct reused=   4032 got='64844'
+
+[e2b-nvfp4-AFTER-needle] retrieval 7/9, tokens from cache: 6848, degenerate outputs: 0, elapsed 0.1 min
+VERDICT: FAIL - needle lost or output degenerated under reuse

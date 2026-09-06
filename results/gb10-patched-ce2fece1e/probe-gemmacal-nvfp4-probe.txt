@@ -1,0 +1,8 @@
+n=    0 words (34 chat tokens) needle=27611 | chat: MISS '2024' | raw: MISS 'What Is The Answer The Name The The Answ'
+n=   20 words (53 chat tokens) needle=31620 | chat: MISS '30030031' | raw: MISS 'Whatisnthepath\nthepathisnothepath\n...\nth'
+n=   50 words (84 chat tokens) needle=41918 | chat: MISS '412.' | raw: MISS 'Whatisnttravtravtravtravtravtravtravtrav'
+n=  100 words (133 chat tokens) needle=86172 | chat: MISS '865123456' | raw: MISS '000stonesstonesstonesstonesstonesstoness'
+n=  200 words (234 chat tokens) needle=18795 | chat: MISS '1. **888** (or **88**).' | raw: MISS 'Whatiscarcarcarcarcarcarcarcarcarcarcarc'
+n=  400 words (434 chat tokens) needle=75232 | chat: MISS '70.123456789' | raw: MISS '123\n\nquietquietquietquietquietquietquiet'
+n=  800 words (833 chat tokens) needle=23780 | chat: MISS '2023' | raw: MISS '23stonesstonesstonesstonesstonesstonesst'
+n= 1600 words (1633 chat tokens) needle=61520 | chat: MISS '60%' | raw: MISS '111111111111311'

@@ -1,0 +1,8 @@
+n=    0 words (38 chat tokens) needle=27611 | chat: MISS '2:----1' | raw: MISS '---------------'
+n=   20 words (57 chat tokens) needle=31620 | chat: MISS '3:.thought..III' | raw: MISS 'Just-_____.________'
+n=   50 words (88 chat tokens) needle=41918 | chat: MISS '4--thought......//' | raw: MISS 'What111111111111111'
+n=  100 words (137 chat tokens) needle=86172 | chat: MISS '8--.1--/1-/' | raw: MISS 'What11----111111111'
+n=  200 words (238 chat tokens) needle=18795 | chat: MISS '1-.....///-----' | raw: MISS 'What-1---__1______1'
+n=  400 words (438 chat tokens) needle=75232 | chat: MISS '7-..../A-/----' | raw: MISS '------1-1---1__'
+n=  800 words (837 chat tokens) needle=23780 | chat: MISS '2..........--.' | raw: MISS 'or1----1-------1'
+n= 1600 words (1637 chat tokens) needle=61520 | chat: MISS '6--.IIIIIIIII' | raw: MISS '--1111111-11--1'

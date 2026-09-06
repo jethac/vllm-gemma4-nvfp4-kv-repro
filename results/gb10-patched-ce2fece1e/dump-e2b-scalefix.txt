@@ -1,0 +1,49 @@
+WARNING 09-06 10:13:37 [model.py:981] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+[transformers] `SiglipImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `SiglipImageProcessor` instead.
+WARNING 09-06 10:13:39 [vllm.py:1388] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+WARNING 09-06 10:13:39 [vllm.py:1423] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=2630804) Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(EngineCore pid=2630804) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:58<00:00, 58.57s/it]
+(EngineCore pid=2630804) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:58<00:00, 58.57s/it]
+(EngineCore pid=2630804) 
+(EngineCore pid=2630804) WARNING 09-06 10:14:46 [flashinfer.py:971] FlashInfer XQA decode does not support head_dim=512; reverting this KV-cache group to native FlashInfer decode.
+(EngineCore pid=2630804) WARNING 09-06 10:14:49 [serial_utils.py:79] Allowing insecure serialization using pickle due to VLLM_ALLOW_INSECURE_SERIALIZATION=1
+(EngineCore pid=2630804) WARNING 09-06 10:14:49 [serial_utils.py:79] Allowing insecure serialization using pickle due to VLLM_ALLOW_INSECURE_SERIALIZATION=1
+WARNING 09-06 10:14:49 [serial_utils.py:79] Allowing insecure serialization using pickle due to VLLM_ALLOW_INSECURE_SERIALIZATION=1
+L 0 k=0.2412 v=2.2812 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L 1 k=0.1338 v=2.5156 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L 2 k=0.2041 v=2.6250 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L 3 k=0.1729 v=2.0781 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L 4 k=0.1572 v=3.6875 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L 5 k=0.2148 v=2.6406 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L 6 k=0.1797 v=2.4688 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L 7 k=0.1846 v=2.6406 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L 8 k=0.2432 v=2.6562 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L 9 k=0.1553 v=3.5625 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L10 k=0.2451 v=2.6094 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L11 k=0.2490 v=2.2656 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L12 k=0.2422 v=2.6250 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L13 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L14 k=0.1836 v=3.6875 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=None
+L15 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L16 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L17 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L18 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L19 k=0.1836 v=3.6875 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.14.self_attn.attn
+L20 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L21 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L22 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L23 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L24 k=0.1836 v=3.6875 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.14.self_attn.attn
+L25 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L26 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L27 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L28 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L29 k=0.1836 v=3.6875 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.14.self_attn.attn
+L30 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L31 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L32 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L33 k=0.2871 v=2.6719 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.13.self_attn.attn
+L34 k=0.1836 v=3.6875 q=1.0000 param=False qm=CompressedTensorsKVCacheMethod dtype=nvfp4 target=language_model.model.layers.14.self_attn.attn
+SCALES_DUMP_DONE
+WARNING 09-06 10:14:51 [core_client.py:728] [shutdown] MPClient: engine core exited unexpectedly; starting cleanup
