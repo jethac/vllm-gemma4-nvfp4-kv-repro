@@ -40,7 +40,8 @@ Fix: copy the target's scales onto the sharing layer when the shared cache is bo
 ## Reproduce
 
 ```bash
-# 1. calibrated checkpoint (llm-compressor 0.12, compressed-tensors 0.17.1)
+# 1. calibrated checkpoint: use the pre-built one, or make your own (llm-compressor 0.12, compressed-tensors 0.17.1, ~2 min on a 5090)
+#    https://huggingface.co/jethachan/gemma-4-E2B-it-NVFP4KV-calib
 python scripts/calibrate.py --model google/gemma-4-E2B-it --out ./gemma4-e2b-nvfp4kv
 
 # 2. serve with NVFP4 KV (default compilation config)
