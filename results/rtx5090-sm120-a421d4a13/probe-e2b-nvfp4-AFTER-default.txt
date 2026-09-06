@@ -1,0 +1,8 @@
+n=    0 words (34 chat tokens) needle=27611 | chat: OK   '27611' | raw: MISS 'What is the secret code?'
+n=   20 words (53 chat tokens) needle=31620 | chat: OK   '31620' | raw: MISS 'A: A: A: A: A: A: A: A:'
+n=   50 words (84 chat tokens) needle=41918 | chat: OK   '41918' | raw: MISS 'A: A: A: A: A: A: A: A:'
+n=  100 words (133 chat tokens) needle=86172 | chat: OK   '86172' | raw: MISS 'A: A: A: A: A: A: A: A:'
+n=  200 words (234 chat tokens) needle=18795 | chat: OK   '18795' | raw: OK   '18795'
+n=  400 words (434 chat tokens) needle=75232 | chat: OK   '75232' | raw: OK   '75232.'
+n=  800 words (833 chat tokens) needle=23780 | chat: OK   '23780' | raw: OK   '23780.'
+n= 1600 words (1633 chat tokens) needle=61520 | chat: OK   '61520' | raw: OK   '61520'

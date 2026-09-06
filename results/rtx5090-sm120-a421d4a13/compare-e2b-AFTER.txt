@@ -1,0 +1,67 @@
+WARNING 09-06 15:47:58 [model.py:991] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+[transformers] `SiglipImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `SiglipImageProcessor` instead.
+WARNING 09-06 15:48:01 [vllm.py:1379] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+WARNING 09-06 15:48:01 [vllm.py:1414] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=46955) Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(EngineCore pid=46955) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:01<00:00,  1.05s/it]
+(EngineCore pid=46955) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:01<00:00,  1.05s/it]
+(EngineCore pid=46955) 
+(EngineCore pid=46955) 2026-09-06 15:48:13,966 - INFO - autotuner.py:2789 - flashinfer.jit: [Autotuner]: Loaded 0 configs from /root/.cache/vllm/flashinfer_autotune_cache/0.6.18/120f/7942ed7de74974b0882aba55c21d93193f8f1d1a998a423e9f9ee4f187963ef4/autotune_configs.json
+(EngineCore pid=46955) 2026-09-06 15:48:13,966 - INFO - autotuner.py:972 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+(EngineCore pid=46955) 2026-09-06 15:48:14,037 - INFO - autotuner.py:995 - flashinfer.jit: [Autotuner]: Autotuning process ends
+(EngineCore pid=46955) 2026-09-06 15:48:14,042 - INFO - autotuner.py:2652 - flashinfer.jit: [Autotuner]: Saved 0 configs to /root/.cache/vllm/flashinfer_autotune_cache/0.6.18/120f/7942ed7de74974b0882aba55c21d93193f8f1d1a998a423e9f9ee4f187963ef4/autotune_configs.json (0 new, 0 from previous config)
+(EngineCore pid=46955) WARNING 09-06 15:48:15 [serial_utils.py:79] Allowing insecure serialization using pickle due to VLLM_ALLOW_INSECURE_SERIALIZATION=1
+WARNING 09-06 15:48:15 [serial_utils.py:79] Allowing insecure serialization using pickle due to VLLM_ALLOW_INSECURE_SERIALIZATION=1
+Rendering prompts:   0%|          | 0/1 [00:00<?, ?it/s]Rendering prompts: 100%|██████████| 1/1 [00:00<00:00, 65.96it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s](EngineCore pid=46955) WARNING 09-06 15:48:17 [jit_monitor.py:141] Triton kernel JIT compilation during inference: kernel_unified_attention. This causes a latency spike; consider extending warmup to cover this shape/config.
+Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  2.44it/s, est. speed input: 1539.22 toks/s, output: 17.10 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  2.44it/s, est. speed input: 1539.22 toks/s, output: 17.10 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  2.44it/s, est. speed input: 1539.22 toks/s, output: 17.10 toks/s]
+[bf16-default] answer=' 48213' layers captured=35
+WARNING 09-06 15:48:20 [model.py:991] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+(EngineCore pid=47122) Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(EngineCore pid=47122) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:01<00:00,  1.05s/it]
+(EngineCore pid=47122) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:01<00:00,  1.05s/it]
+(EngineCore pid=47122) 
+(EngineCore pid=47122) WARNING 09-06 15:48:32 [flashinfer.py:985] FlashInfer XQA decode does not support head_dim=512; reverting this KV-cache group to native FlashInfer decode.
+(EngineCore pid=47122) 2026-09-06 15:48:32,827 - INFO - autotuner.py:2789 - flashinfer.jit: [Autotuner]: Loaded 0 configs from /root/.cache/vllm/flashinfer_autotune_cache/0.6.18/120f/c99ee0c5e670c841f797b225bb09cefc90465c1950cc0c3e246bea4fc2c6397d/autotune_configs.json
+(EngineCore pid=47122) 2026-09-06 15:48:32,827 - INFO - autotuner.py:972 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+(EngineCore pid=47122) 2026-09-06 15:48:33,046 - INFO - autotuner.py:995 - flashinfer.jit: [Autotuner]: Autotuning process ends
+(EngineCore pid=47122) 2026-09-06 15:48:33,050 - INFO - autotuner.py:2652 - flashinfer.jit: [Autotuner]: Saved 0 configs to /root/.cache/vllm/flashinfer_autotune_cache/0.6.18/120f/c99ee0c5e670c841f797b225bb09cefc90465c1950cc0c3e246bea4fc2c6397d/autotune_configs.json (0 new, 0 from previous config)
+Rendering prompts:   0%|          | 0/1 [00:00<?, ?it/s]Rendering prompts: 100%|██████████| 1/1 [00:00<00:00, 295.64it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  2.40it/s, est. speed input: 1512.01 toks/s, output: 16.80 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  2.40it/s, est. speed input: 1512.01 toks/s, output: 16.80 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  2.40it/s, est. speed input: 1512.01 toks/s, output: 16.80 toks/s]
+[nvfp4-flashinfer] answer=' 48213' layers captured=35
+L 0 rel_err=0.1123 cos=0.9937 language_model.model.layers.0.self_attn.attn
+L 1 rel_err=0.1080 cos=0.9941 language_model.model.layers.1.self_attn.attn
+L 2 rel_err=0.1436 cos=0.9896 language_model.model.layers.2.self_attn.attn
+L 3 rel_err=0.1234 cos=0.9923 language_model.model.layers.3.self_attn.attn
+L 4 rel_err=0.1052 cos=0.9945 language_model.model.layers.4.self_attn.attn
+L 5 rel_err=0.1336 cos=0.9910 language_model.model.layers.5.self_attn.attn
+L 6 rel_err=0.1032 cos=0.9947 language_model.model.layers.6.self_attn.attn
+L 7 rel_err=0.1276 cos=0.9919 language_model.model.layers.7.self_attn.attn
+L 8 rel_err=0.1650 cos=0.9863 language_model.model.layers.8.self_attn.attn
+L 9 rel_err=0.1584 cos=0.9875 language_model.model.layers.9.self_attn.attn
+L10 rel_err=0.1727 cos=0.9850 language_model.model.layers.10.self_attn.attn
+L11 rel_err=0.1647 cos=0.9863 language_model.model.layers.11.self_attn.attn
+L12 rel_err=0.1685 cos=0.9860 language_model.model.layers.12.self_attn.attn
+L13 rel_err=0.2074 cos=0.9782 language_model.model.layers.13.self_attn.attn
+L14 rel_err=0.1743 cos=0.9848 language_model.model.layers.14.self_attn.attn
+L15 rel_err=0.2100 cos=0.9779 language_model.model.layers.15.self_attn.attn
+L16 rel_err=0.2210 cos=0.9753 language_model.model.layers.16.self_attn.attn
+L17 rel_err=0.2006 cos=0.9796 language_model.model.layers.17.self_attn.attn
+L18 rel_err=0.1905 cos=0.9816 language_model.model.layers.18.self_attn.attn
+L19 rel_err=0.1944 cos=0.9811 language_model.model.layers.19.self_attn.attn
+L20 rel_err=0.2236 cos=0.9751 language_model.model.layers.20.self_attn.attn
+L21 rel_err=0.2378 cos=0.9717 language_model.model.layers.21.self_attn.attn
+L22 rel_err=0.2099 cos=0.9779 language_model.model.layers.22.self_attn.attn
+L23 rel_err=0.2179 cos=0.9761 language_model.model.layers.23.self_attn.attn
+L24 rel_err=0.2049 cos=0.9791 language_model.model.layers.24.self_attn.attn
+L25 rel_err=0.1655 cos=0.9866 language_model.model.layers.25.self_attn.attn
+L26 rel_err=0.2300 cos=0.9737 language_model.model.layers.26.self_attn.attn
+L27 rel_err=0.1797 cos=0.9840 language_model.model.layers.27.self_attn.attn
+L28 rel_err=0.1862 cos=0.9829 language_model.model.layers.28.self_attn.attn
+L29 rel_err=0.2388 cos=0.9715 language_model.model.layers.29.self_attn.attn
+L30 rel_err=0.1404 cos=0.9904 language_model.model.layers.30.self_attn.attn
+L31 rel_err=0.1228 cos=0.9928 language_model.model.layers.31.self_attn.attn
+L32 rel_err=0.1278 cos=0.9922 language_model.model.layers.32.self_attn.attn
+L33 rel_err=0.1909 cos=0.9819 language_model.model.layers.33.self_attn.attn
+L34 rel_err=0.1982 cos=0.9805 language_model.model.layers.34.self_attn.attn
+COMPARE_DONE

@@ -1,0 +1,8 @@
+n=    0 words (38 chat tokens) needle=27611 | chat: OK   '27611' | raw: MISS ': : : : : : : :'
+n=   20 words (57 chat tokens) needle=31620 | chat: OK   '31620' | raw: MISS 'Just the number.\nA: Just the number.\nA: '
+n=   50 words (88 chat tokens) needle=41918 | chat: OK   '41918' | raw: MISS 'What is the number?\nA: What is the numbe'
+n=  100 words (137 chat tokens) needle=86172 | chat: OK   '86172' | raw: MISS '1\nA: 1\nA: 1\nA:'
+n=  200 words (238 chat tokens) needle=18795 | chat: OK   '18795' | raw: MISS 'What is the secret code? Answer with jus'
+n=  400 words (438 chat tokens) needle=75232 | chat: OK   '75232' | raw: MISS '1234567890\nA: 1'
+n=  800 words (837 chat tokens) needle=23780 | chat: OK   '23780' | raw: MISS '111111111111111'
+n= 1600 words (1637 chat tokens) needle=61520 | chat: OK   '61520' | raw: MISS '111111111111111'

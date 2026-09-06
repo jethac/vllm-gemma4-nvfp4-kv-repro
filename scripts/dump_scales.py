@@ -2,7 +2,7 @@
 import sys, json
 from vllm import LLM
 model = sys.argv[1]; kv = sys.argv[2] if len(sys.argv) > 2 else "nvfp4"
-llm = LLM(model=model, kv_cache_dtype=kv, max_model_len=2048, gpu_memory_utilization=0.35, enforce_eager=True,
+llm = LLM(model=model, kv_cache_dtype=kv, max_model_len=2048, gpu_memory_utilization=float(__import__("os").environ.get("GPU_UTIL", "0.8")), enforce_eager=True,
           language_model_only=True, enable_prefix_caching=False)
 def dump(worker):
     ctx = worker.vllm_config.compilation_config.static_forward_context

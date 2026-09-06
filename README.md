@@ -61,7 +61,40 @@ Both need `VLLM_ALLOW_INSECURE_SERIALIZATION=1` (they use `collective_rpc` with 
 
 ## Results
 
-RESULTS_PLACEHOLDER
+Same compiled kernels on each machine; "before" swaps in the four affected Python files from the #46329 head
+(b423d395d, no fixes), "after" uses the test branch (a421d4a13, both fixes). Probe: needle at 0/20/50/100/200/400/800/1600
+filler words, chat-template and raw-completion prompts, temperature 0, default compilation config unless noted.
+Checkpoints calibrated on the spot with `scripts/calibrate.py` (256 samples, seq 2048; 128 for 12B).
+
+| Model / KV | config | RTX 5090 (sm120) | GB10 (sm121) |
+|---|---|---|---|
+| Gemma-4-E2B, nvfp4 | before, default | 0/8 chat, 0/8 raw | 0/8 chat, 0/8 raw |
+| Gemma-4-E2B, nvfp4 | before, `--enforce-eager` | 8/8 chat, 5/8 raw | (8/8 chat on the older checkout) |
+| Gemma-4-E2B, nvfp4 | **after, default** | **8/8 chat, 4/8 raw** | **8/8 chat, 4/8 raw** |
+| Gemma-4-E2B, bf16 KV (reference) | default | 8/8 chat, 4/8 raw | 8/8 chat, 4/8 raw |
+| Gemma-4-12B, nvfp4 | before, default | (0/8 on the older checkout) | 0/8 chat, 0/8 raw |
+| Gemma-4-12B, nvfp4 | **after, default** | **8/8 chat**, 0/8 raw | **8/8 chat**, 0/8 raw |
+| Gemma-3-1B, nvfp4 (head 256, control) | after, default | 7/8 chat, 8/8 raw | 7/8 chat, 8/8 raw |
+
+Raw-completion misses on 12B are the base model continuing the "Q:/A:" prompt with more questions, same as bf16; the
+chat column is the one that measures correctness.
+
+Bug 2 in isolation, Gemma-4-E2B, eager, per-layer attention-output relative error vs bf16 KV (`compare_layers.py`):
+
+| layer | 5090 before | 5090 after | GB10 before | GB10 after |
+|---|---|---|---|---|
+| 0 | 0.11 | 0.11 | 0.11 | 0.11 |
+| 13 (last non-shared full-attn) | 0.21 | 0.21 | 0.22 | 0.22 |
+| 15 (first sharing layer) | 0.41 | 0.21 | 0.40 | 0.22 |
+| 17 | 0.69 | 0.20 | 0.66 | 0.21 |
+| 29 | 0.92 | 0.24 | 0.91 | 0.25 |
+| 34 | 0.85 | 0.20 | 0.86 | 0.21 |
+
+`dump_scales.py` before: layers 0-14 carry calibrated scales (k 0.13-0.29, v 2.1-3.7), layers 15-34 are k=v=1.0 with
+`target=layers.13/14`. After: 15-34 carry their target's values.
+
+Raw outputs are under `results/rtx5090-sm120-a421d4a13/` and `results/gb10-sm121-a421d4a13/`;
+`results/gb10-patched-ce2fece1e/` is the earlier diagnosis run on an older checkout (cudagraph-mode split etc.).
 
 ## Wheels
 

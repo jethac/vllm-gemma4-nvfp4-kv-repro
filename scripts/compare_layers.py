@@ -23,7 +23,7 @@ def fetch(worker):
     return {n: t for n, t in worker._cap.items()}
 
 def run(tag, **kw):
-    llm = LLM(model=model, max_model_len=4096, gpu_memory_utilization=0.40, enforce_eager=True, language_model_only=True, enable_prefix_caching=False, **kw)
+    llm = LLM(model=model, max_model_len=4096, gpu_memory_utilization=float(__import__("os").environ.get("GPU_UTIL", "0.8")), enforce_eager=True, language_model_only=True, enable_prefix_caching=False, **kw)
     llm.collective_rpc(install)
     out = llm.generate([prompt], SamplingParams(max_tokens=8, temperature=0))[0].outputs[0].text
     caps = llm.collective_rpc(fetch)[0]
