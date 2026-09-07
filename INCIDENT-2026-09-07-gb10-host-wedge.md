@@ -13,8 +13,8 @@ vllm serve <gemma-4-31B-it, calibrated NVFP4 KV> --kv-cache-dtype nvfp4 \
 ```
 
 vLLM build: `jethac/vllm` a421d4a13 (= #46329 head + #55559). **#49760 was deliberately not in this
-build.** Gemma-4-E4B (util 0.60) and 31B NVFP4 (util 0.88) had already completed successfully;
-the host died during the run that followed.
+build.** Gemma-4-E4B (util 0.60) and Gemma-4-31B (util 0.88, both NVFP4 and bf16 KV, 8/8 needles each) had
+already completed successfully; the host died during the 26B-A4B run that followed.
 
 The host stopped answering SSH and ICMP entirely. Tailscale still listed the node as `active` with
 `tx … rx 0` — packets going out, nothing coming back. Recovery required a physical power cycle.
@@ -43,16 +43,43 @@ If the requested budget would fall below that reserve, startup fails cleanly ins
 host — which is the behaviour you want: a failed `vllm serve` is recoverable over SSH, a wedged Spark
 is not.
 
-## Follow-up planned
+## Follow-up: what happened with #49760 applied
 
-Run Gemma-4-26B-A4B-it (bf16 weights, calibrated NVFP4 KV) on the same GB10 twice at a utilization
-that reproduces the wedge:
+Three further attempts at Gemma-4-26B-A4B-it (49.44 GiB of bf16 weights, calibrated NVFP4 KV) on the
+same GB10, this time on a build **with** #49760 (`test/nvfp4-both-fixes-plus-49760`, ef03e286d),
+`VLLM_UNIFIED_MEMORY_HOST_RESERVE_GB=16`, and an external watchdog killing vLLM if `MemAvailable`
+fell below 4-8 GiB:
 
-1. build **without** #49760 → expect host wedge (or, at minimum, the unbounded budget)
-2. build **with** #49760 (`test/nvfp4-both-fixes-plus-49760`, ef03e286d — pure Python, no rebuild
-   needed) → expect a clean cap, or a clean startup failure, and a live host either way
+| attempt | util | outcome |
+|---|---|---|
+| 1 | 0.88 | cap fired, then avail → 3 GiB after torch.compile; watchdog killed vLLM |
+| 2 | 0.60 | avail → 5 GiB (contaminated: another service was loading concurrently) |
+| 3 | 0.60, clean box | avail → 3 GiB; watchdog killed vLLM |
 
-That pair is the evidence #46307 deserves; this incident is only the first half of it.
+The cap works and is visible in the log:
+
+```
+WARNING [mem_utils.py:142] Integrated (unified-memory) GPU detected: capping the memory budget
+from 105.28GiB to 96.93GiB to keep 16.0GiB free for the OS.
+```
+
+Two things worth noting for #46307 / #49760:
+
+1. **The cap governs the profiled budget, not the resident footprint.** At util 0.60 the budget is
+   ~71 GiB, well clear of the 49 GiB of weights, and the host *still* ran out. So the binding
+   constraint is not the number the cap adjusts.
+2. **The collapse is fast.** A 10-second memory sampler recorded a floor of 18 GiB while the
+   2-second watchdog caught the same run hitting 3 GiB — available memory fell more than 20 GiB
+   inside one sampling window, consistent with a single large allocation late in startup
+   (KV-cache allocation or graph capture) rather than a gradual climb.
+
+The practical read: 26B-A4B does not come up on a 119 GiB Spark today, with or without #49760, which
+matches vllm-project/vllm#46329's own statement that this configuration is blocked in the MoE-weight
+path rather than the KV path. #49760 remains necessary — it is what turns "0.88 wedges the host" into
+"0.88 is capped to something survivable" — but it is not sufficient for this model on this box.
+
+Every attempt after the first incident kept the host alive, because of the external watchdog rather
+than anything in vLLM. That is the gap worth closing: the promised clean startup failure never fired.
 
 ## Operational note for anyone testing on a Spark
 

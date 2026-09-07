@@ -113,8 +113,8 @@ Same fixed build, checkpoints already calibrated on that box, default compilatio
 | model | NVFP4 KV | bf16 KV |
 |---|---|---|
 | Gemma-4-E4B-it | 8/8 chat | 8/8 chat |
-| Gemma-4-31B-it | 8/8 chat | run interrupted |
-| Gemma-4-26B-A4B-it | not reached | not reached |
+| Gemma-4-31B-it | 8/8 chat | 8/8 chat |
+| Gemma-4-26B-A4B-it | does not start on 119 GiB unified memory (see incident note) | — |
 
 The run was cut short when `--gpu-memory-utilization 0.88` — carried over unchanged from a discrete
 96 GiB card — wedged the unified-memory host. See
