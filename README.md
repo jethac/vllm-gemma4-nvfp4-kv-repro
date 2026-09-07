@@ -94,8 +94,17 @@ Bug 2 in isolation, Gemma-4-E2B, eager, per-layer attention-output relative erro
 `dump_scales.py` before: layers 0-14 carry calibrated scales (k 0.13-0.29, v 2.1-3.7), layers 15-34 are k=v=1.0 with
 `target=layers.13/14`. After: 15-34 carry their target's values.
 
+Rest of the Gemma 4 family, RTX PRO 6000 Blackwell (sm120, 96 GB), same released wheel, each model calibrated on
+the spot, default compilation config (chat needles):
+
+| model | NVFP4 KV | bf16 KV |
+|---|---|---|
+| Gemma-4-E4B-it | 8/8 | 8/8 |
+| Gemma-4-31B-it | 8/8 | 8/8 |
+| Gemma-4-26B-A4B-it (MoE) | 8/8 | 8/8 |
+
 Raw outputs are under `results/rtx5090-sm120-a421d4a13/` and `results/gb10-sm121-a421d4a13/`;
-`results/gb10-patched-ce2fece1e/` is the earlier diagnosis run on an older checkout (cudagraph-mode split etc.).
+`results/rtxpro6000-sm120-a421d4a13/` has the family re-run; `results/gb10-patched-ce2fece1e/` is the earlier diagnosis run on an older checkout (cudagraph-mode split etc.).
 
 ## Wheels
 
