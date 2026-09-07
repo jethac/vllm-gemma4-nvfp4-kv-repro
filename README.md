@@ -113,5 +113,8 @@ uv pip install <wheel> --extra-index-url https://flashinfer.ai/whl/
 
 ## Layout
 
+- `scripts/test_gemma4_nvfp4_kv_sm12x.py` the vLLM e2e regression test (also in the PR). On a GB10 with one
+  compiled build, swapping only the four affected Python files: fails on the pre-fix head b423d395d with all four
+  needles missed, passes with the fixes.
 - `scripts/` the probes and the calibration script (`prefix_cache_needle.py` used in the thread is maxpla3's, see #46329).
 - `results/` raw probe / dump / compare outputs per machine and build.
