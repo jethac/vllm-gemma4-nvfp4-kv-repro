@@ -106,6 +106,21 @@ the spot, default compilation config (chat needles):
 Raw outputs are under `results/rtx5090-sm120-a421d4a13/` and `results/gb10-sm121-a421d4a13/`;
 `results/rtxpro6000-sm120-a421d4a13/` has the family re-run; `results/gb10-patched-ce2fece1e/` is the earlier diagnosis run on an older checkout (cudagraph-mode split etc.).
 
+## sm121 (GB10 / DGX Spark) partial run, 2026-09-07
+
+Same fixed build, checkpoints already calibrated on that box, default compilation config:
+
+| model | NVFP4 KV | bf16 KV |
+|---|---|---|
+| Gemma-4-E4B-it | 8/8 chat | 8/8 chat |
+| Gemma-4-31B-it | 8/8 chat | run interrupted |
+| Gemma-4-26B-A4B-it | not reached | not reached |
+
+The run was cut short when `--gpu-memory-utilization 0.88` — carried over unchanged from a discrete
+96 GiB card — wedged the unified-memory host. See
+[INCIDENT-2026-09-07-gb10-host-wedge.md](INCIDENT-2026-09-07-gb10-host-wedge.md); it is field evidence
+for vllm-project/vllm#46307 / #49760.
+
 ## Wheels
 
 Release assets are vLLM built from branch `test/nvfp4-both-fixes` (jethac/vllm, commit a421d4a13 = #46329 head
