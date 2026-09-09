@@ -1,14 +1,20 @@
 # Gemma-4 NVFP4 KV on consumer Blackwell: repro and verification
 
-Companion to vllm-project/vllm#46329 (NVFP4 KV cache on sm120/sm121 via FlashInfer FA2) and
-vllm-project/vllm#55559 (KV-sharing layers inherit the target layer's quantized-KV scales).
+Companion to vllm-project/vllm#46329 (NVFP4 KV cache on sm120/sm121 via FlashInfer FA2),
+vllm-project/vllm#55559 (KV-sharing layers inherit the target layer's quantized-KV scales) and
+vllm-project/vllm#55976 (the KV-cache writer lays V block scales out linearly on SM120/SM121).
+
+> **2026-09-09.** The writer fix has been split out of #46329 into its own bugfix PR, #55976, because
+> upstream's #55908 landed the matching test and consumer Blackwell now fails
+> `test_reshape_and_cache_flash[nvfp4]` on `main` without it (24 failed on sm_120 and sm_121; 24 passed
+> with the fix). The wheels below are rebuilt from all three PRs on top of current `main`.
 
 Gemma-4 models served with `--kv-cache-dtype nvfp4` on RTX 5090 (sm120) and GB10 / DGX Spark (sm121)
 produced garbage under the default compilation config, even for a 34-token prompt, while `--enforce-eager`
-was correct. This repo has the two root causes, the probes that isolate them, the numbers, and wheels of
+was correct. This repo has the root causes, the probes that isolate them, the numbers, and wheels of
 the fixed branch so anyone with a 5090 or a GB10 can check without building vLLM.
 
-## The two bugs
+## The bugs
 
 **1. FULL cudagraph decode capture around the VO-split prefill wrapper** (fixed in #46329, commit 8bc0d3b10).
 Gemma-4's global-attention layers have `head_dim` 512. On the FA2 NVFP4 path vLLM runs them as two passes with
@@ -27,6 +33,16 @@ layers (they have no K/V projections), so they kept the 1.0 default. FlashInfer 
 scale and applies `v_scale` to the output, so attention on those 20 layers ran about 5x too sharp with V about
 0.4x. This is a quality degradation, not the collapse; it also applies to fp8 KV.
 Fix: copy the target's scales onto the sharing layer when the shared cache is bound.
+
+**3. The KV-cache writer lays V block scales out for the wrong reader on SM120/SM121** (fixed in #55976).
+`reshape_and_cache_nvfp4_kernel` wrote K block scales linearly and V block scales in the SM100 trtllm-gen
+4-token swizzle, unconditionally. Consumer Blackwell reads them through the FlashInfer FA2 paged reader,
+which takes scale strides from the SF tensor and reads V linearly, so V dequantized to garbage.
+Fix: make the V swizzle conditional on the cache's device (`major < 12`); K and the page layout are unchanged,
+so SM100 is bit-identical. Since upstream #55908 landed the matching test, `main` without this fix fails
+`test_reshape_and_cache_flash[nvfp4]` on consumer Blackwell: 24 failed / 0 passed on both an RTX PRO 4500
+(sm_120, measured by @TensorRaya) and a GB10 (sm_121, measured by @hclsys), 24 passed with the fix. The
+B200 job attached to #55908 is SM100, where writer and test agree, so upstream CI does not surface it.
 
 ## What is NOT the cause (ruled out along the way)
 
@@ -123,11 +139,16 @@ for vllm-project/vllm#46307 / #49760.
 
 ## Wheels
 
-Release assets are vLLM built from branch `test/nvfp4-both-fixes` (jethac/vllm, commit a421d4a13 = #46329 head
-8bc0d3b10 + #55559's c474f4722 cherry-picked), torch 2.13.0+cu130, FlashInfer 0.6.18:
+Release assets are vLLM built from branch `community/nvfp4-stack` (jethac/vllm), which is current
+upstream `main` plus, in order, #55976 (writer), #46329 (NVFP4 KV on sm12x) and #55559 (KV-sharing
+scales, cherry-picked since it is still open). torch 2.13.0+cu130, FlashInfer 0.6.18:
 
 - `vllm-*-cp312-*-linux_x86_64.whl`: sm_120 (RTX 5090), built on a RunPod 5090.
 - `vllm-*-cp312-*-linux_aarch64.whl`: sm_120 + sm_121 (GB10 / DGX Spark), built on the Spark.
+
+The earlier `v2026.09.06-a421d4a13` release stays up for reproducing the numbers in the tables below,
+which were measured against it. Prefer the newest release for actually running anything: it carries the
+writer fix as upstream will take it, the NVFP4-only VO-split gating, and the DeviceGuard ordering fix.
 
 ```bash
 uv venv --python 3.12 && . .venv/bin/activate
